@@ -1,0 +1,19 @@
+{
+  "name": "@luncheon/golomb-code",
+  "version": "1.0.0",
+  "description": "A Golomb coding implementation.",
+  "license": "WTFPL",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/luncheon/golomb-code.git"
+  },
+  "type": "module",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "dependencies": {
+    "@luncheon/truncated-binary-code": "^1.0.0"
+  }
+}
