@@ -1,6 +1,7 @@
 import { decodeTruncatedBinary, encodeTruncatedBinary } from "@luncheon/truncated-binary-code";
 
 export function* encodeGolomb(n, m, zigzag) {
+  if (!(m >= 1)) throw RangeError("encodeGolomb: M must be a positive integer.")
   if (n < 0 && !zigzag) throw RangeError("encodeGolomb: supports only non-negative integers.");
   if (zigzag && (n > 0x3fffffff || n < -0x40000000)) {
     n = BigInt(n);
@@ -20,6 +21,7 @@ export function* encodeGolomb(n, m, zigzag) {
 const decodeBigZigzag = (n) => (n >> 1n) ^ -(n & 1n);
 
 export const decodeGolomb = (bitSequence, m, zigzag) => {
+  if (!(m >= 1)) throw RangeError("encodeGolomb: M must be a positive integer.")
   const bitIterator = Iterator.from(bitSequence);
   let q = 0;
   while (1) {

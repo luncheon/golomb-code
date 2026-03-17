@@ -2,6 +2,12 @@ import assert from "node:assert/strict";
 import { it } from "node:test";
 import { decodeGolomb, encodeGolomb } from "./index.js";
 
+it("should throw if invalid args", () => {
+  assert.throws(() => encodeGolomb(-1, 1).toArray(), RangeError);
+  assert.throws(() => encodeGolomb(0, 0).toArray(), RangeError);
+  assert.throws(() => encodeGolomb(0).toArray(), RangeError);
+});
+
 // https://urchin.earth.li/~twic/Golombs_Original_Paper/
 it("encode(m=1)", () => {
   assert.deepEqual(encodeGolomb(0, 1).toArray(), [0]);
@@ -133,7 +139,7 @@ it("32bit boundary", () => {
     assert.equal(decodeGolomb(encodeGolomb(n, m, true), m, true), n);
     assert.equal(decodeGolomb(encodeGolomb(-n, m, true), m, true), 0 - n);
   }
-})
+});
 
 it("random", () => {
   for (let i = 0; i < 1000; i++) {
