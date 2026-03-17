@@ -126,6 +126,15 @@ it("decode", () => {
   }
 });
 
+it("32bit boundary", () => {
+  const m = 0x100000;
+  for (const n of [0x3fffffff, 0x40000000, 0x40000001, 0x7fffffff, 0x80000000, 0xffffffff]) {
+    assert.equal(decodeGolomb(encodeGolomb(n, m), m), n);
+    assert.equal(decodeGolomb(encodeGolomb(n, m, true), m, true), n);
+    assert.equal(decodeGolomb(encodeGolomb(-n, m, true), m, true), 0 - n);
+  }
+})
+
 it("random", () => {
   for (let i = 0; i < 1000; i++) {
     const m = Math.round(Math.random() * (Number.MAX_SAFE_INTEGER - 2)) + 2;

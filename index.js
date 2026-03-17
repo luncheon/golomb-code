@@ -2,7 +2,7 @@ import { decodeTruncatedBinary, encodeTruncatedBinary } from "@luncheon/truncate
 
 export function* encodeGolomb(n, m, zigzag) {
   if (n < 0 && !zigzag) throw RangeError("encodeGolomb: supports only non-negative integers.");
-  if (zigzag && (n | 0) !== n) {
+  if (zigzag && (n > 0x3fffffff || n < -0x40000000)) {
     n = BigInt(n);
     n = (n < 0n ? -1n : 0n) ^ (n << 1n);
     const mn = BigInt(m);
