@@ -8,6 +8,7 @@
     "url": "git+https://github.com/luncheon/golomb-code.git"
   },
   "type": "module",
+  "bin": "cli.js",
   "main": "index.js",
   "types": "index.d.ts",
   "scripts": {
